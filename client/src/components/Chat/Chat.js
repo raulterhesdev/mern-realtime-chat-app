@@ -40,6 +40,7 @@ const Chat = ({ location }) => {
         console.log(error);
       }
     });
+    return () => socket.disconnect();
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
@@ -82,11 +83,7 @@ const Chat = ({ location }) => {
         Room: <Strong size={600}>{room}</Strong>
       </Heading>
       <Pane display='flex' justifyContent='flex-end'>
-        <Link
-          to='/'
-          style={{ textDecoration: 'none' }}
-          onClick={() => socket.emit('disconnect')}
-        >
+        <Link to='/' style={{ textDecoration: 'none' }}>
           <Button appearance='minimal' height={40} iconBefore={ArrowLeftIcon}>
             Leave Room
           </Button>
