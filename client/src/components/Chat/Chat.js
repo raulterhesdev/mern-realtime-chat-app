@@ -109,8 +109,18 @@ const Chat = ({ location }) => {
           marginX='auto'
           position='relative'
         >
-          <Card position='absolute' top='0' left='40%'>
-            <Heading>{botMessage ? botMessage.text : null}</Heading>
+          <Card
+            position='absolute'
+            top={0}
+            left={0}
+            width='100%'
+            display='flex'
+            alignItems='center'
+            justifyContent='center'
+          >
+            <Heading backgroundColor='teal'>
+              {botMessage ? botMessage.text : null}
+            </Heading>
           </Card>
           <Messages messages={messages} name={name} />
           <NewMessage
