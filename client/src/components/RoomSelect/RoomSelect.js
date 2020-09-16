@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
-
-import {
-  Pane,
-  Heading,
-  TextInputField,
-  Button,
-  ArrowRightIcon,
-} from 'evergreen-ui';
+import TextInput from '../TextInput/TextInput';
 
 const RoomSelect = () => {
-  const [name, setName] = useState(null);
+  const [name, setName] = useState('');
   const [nameError, setNameError] = useState(null);
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = useState('');
   const [roomError, setRoomError] = useState(null);
 
   const checkValid = (e) => {
     let canSend = true;
-    if (name === null) {
+    if (name === '') {
       canSend = false;
       setNameError('Please enter your name.');
     }
-    if (room === null) {
+    if (room === '') {
       canSend = false;
       setRoomError('Please enter a room name.');
     }
@@ -32,67 +25,42 @@ const RoomSelect = () => {
   };
 
   return (
-    <Pane
-      height='97vh'
-      width='100%'
-      display='flex'
-      alignItems='center'
-      justifyContent='center'
-      border='none'
-      margin={0}
-    >
-      <Pane
-        display='flex'
-        flexDirection='column'
-        alignItems='flex-start'
-        justifyContent='center'
+    <div>
+      <h1>Welcome to Hazel Chat</h1>
+      <TextInput
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder='Your name...'
+        name='name'
+        label='Name'
+        errorMessage={nameError}
+        onBlur={() =>
+          name === '' ? setNameError('Please enter your name.') : null
+        }
+        onFocus={() => setNameError(null)}
+        error={nameError ? true : false}
+      />
+      <TextInput
+        value={room}
+        onChange={(e) => setRoom(e.target.value)}
+        placeholder='Room Name'
+        name='room'
+        label='Room'
+        errorMessage={roomError}
+        onBlur={() =>
+          room === '' ? setRoomError('Please enter your name.') : null
+        }
+        onFocus={() => setRoomError(null)}
+        error={roomError ? true : false}
+      />
+      <Link
+        onClick={checkValid}
+        to={`/chat?name=${name}&room=${room}`}
+        style={{ textDecoration: 'none' }}
       >
-        <Heading size={700} marginTop='default'>
-          Welcome to Hazel Chat!
-        </Heading>
-
-        <TextInputField
-          isInvalid={nameError ? true : false}
-          label='Name'
-          validationMessage={nameError}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          marginTop={40}
-          width='100%'
-          placeholder='Name...'
-          onBlur={() =>
-            name === null ? setNameError('Please enter your name.') : null
-          }
-          onFocus={() => setNameError(null)}
-        />
-
-        <TextInputField
-          isInvalid={roomError ? true : false}
-          label='Room'
-          validationMessage={roomError}
-          value={room}
-          onChange={(e) => setRoom(e.target.value)}
-          width='100%'
-          placeholder='Room...'
-          onBlur={() =>
-            room === null ? setRoomError('Please enter your name.') : null
-          }
-          onFocus={() => setRoomError(null)}
-        />
-
-        <Pane marginX='auto' marginTop={16}>
-          <Link
-            onClick={checkValid}
-            to={`/chat?name=${name}&room=${room}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <Button appearance='primary' height={40} iconAfter={ArrowRightIcon}>
-              Enter Chat!
-            </Button>
-          </Link>
-        </Pane>
-      </Pane>
-    </Pane>
+        <button type='submit'>Enter Chat!</button>
+      </Link>
+    </div>
   );
 };
 

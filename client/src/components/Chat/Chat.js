@@ -2,14 +2,6 @@ import React, { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import io from 'socket.io-client';
 
-import {
-  ArrowLeftIcon,
-  Heading,
-  Pane,
-  Strong,
-  Button,
-  Card,
-} from 'evergreen-ui';
 import { Link } from 'react-router-dom';
 
 import Messages from './Messages/Messages';
@@ -22,8 +14,19 @@ const Chat = ({ location }) => {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
   const [users, setUsers] = useState([]);
-  const [message, setMessage] = useState();
-  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([
+    {
+      name: 'test',
+      time: '3:47:9 pm',
+      text: 'tetwgwegwegweg',
+    },
+    {
+      name: 'weg',
+      time: '3:47:10 pm',
+      text: 'tetwgwegwegweg',
+    },
+  ]);
   const [botMessage, setBotMessage] = useState({});
   const ENDPOINT = 'http://localhost:5000/';
 
@@ -63,74 +66,102 @@ const Chat = ({ location }) => {
   const sendMessage = (e) => {
     e.preventDefault();
 
-    if (message) {
+    if (message !== '') {
       socket.emit('chatMessage', message);
       setMessage('');
     }
   };
 
   return (
-    <Pane
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-      justifyContent='flex-start'
-    >
-      <Heading size={700} marginTop='default'>
-        Welcome!
-      </Heading>
-      <Heading size={500} marginTop={8}>
-        Room: <Strong size={600}>{room}</Strong>
-      </Heading>
-      <Pane display='flex' justifyContent='flex-end'>
+    <div>
+      <div>
+        <h1>Room: {room}</h1>
         <Link to='/' style={{ textDecoration: 'none' }}>
-          <Button appearance='minimal' height={40} iconBefore={ArrowLeftIcon}>
-            Leave Room
-          </Button>
+          <span>Leave Room</span>
         </Link>
-      </Pane>
-      <Pane
-        display='flex'
-        flexWrap='wrap'
-        width='90%'
-        marginX='auto'
-        marginTop={16}
-      >
-        <Pane>
-          <Users users={users} room={room} />
-        </Pane>
-        <Pane
-          width='80%'
-          minHeight='50vh'
-          minWidth={300}
-          display='flex'
-          flexDirection='column'
-          justifyContent='center'
-          marginX='auto'
-          position='relative'
+      </div>
+      <div>
+        <h3>Logged users:</h3>
+        <Users users={users} room={room} />
+      </div>
+      <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
         >
-          <Card
-            position='absolute'
-            top={0}
-            left={0}
-            width='100%'
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <Heading backgroundColor='teal'>
-              {botMessage ? botMessage.text : null}
-            </Heading>
-          </Card>
+          <span>{botMessage.text}</span>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            width: '100%',
+            height: '70vh',
+            overflowY: 'scroll',
+          }}
+        >
           <Messages messages={messages} name={name} />
-          <NewMessage
-            onSend={sendMessage}
-            setMessage={setMessage}
-            message={message}
-          />
-        </Pane>
-      </Pane>
-    </Pane>
+        </div>
+        <NewMessage
+          onSend={sendMessage}
+          setMessage={setMessage}
+          message={message}
+        />
+      </div>
+    </div>
+    // <Container
+    //   maxWidth='md'
+    //   style={{
+    //     display: 'flex',
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     height: '97vh',
+    //   }}
+    // >
+    //   <Paper>
+    //     <Typography>Welcome {name}!</Typography>
+    //     <Typography>Room: {room}</Typography>
+    //     <Link to='/' style={{ textDecoration: 'none' }}>
+    //       <Button variant='contained' color='primary'>
+    //         Leave Room!
+    //       </Button>
+    //     </Link>
+    //   </Paper>
+    //   <Paper
+    //     style={{
+    //       display: 'flex',
+    //       flexDirection: 'column',
+    //       justifyContent: 'flex-end',
+    //       width: '100%',
+    //       height: '70vh',
+    //       overflowY: 'scroll',
+    //     }}
+    //   >
+    //     <Messages messages={messages} name={name} />
+    //     <NewMessage
+    //       onSend={sendMessage}
+    //       setMessage={setMessage}
+    //       message={message}
+    //     />
+    //   </Paper>
+    //   <Accordion>
+    //     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+    //       <Typography>Logged users</Typography>
+    //     </AccordionSummary>
+    //     <AccordionDetails>
+    //       <Users users={users} room={room} />
+    //     </AccordionDetails>
+    //   </Accordion>
+    // </Container>
   );
 };
 
