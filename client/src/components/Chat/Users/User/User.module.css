@@ -1,0 +1,15 @@
+.User {
+  color: var(--white);
+  margin: 6px 12px;
+  position: relative;
+}
+
+.User span {
+  position: absolute;
+  background-color: var(--white);
+  top: 6px;
+  left: -12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}

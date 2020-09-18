@@ -8,6 +8,8 @@ import Messages from './Messages/Messages';
 import Users from './Users/Users';
 import NewMessage from './NewMessage/NewMessage';
 
+import styles from './Chat.module.css';
+
 let socket;
 
 const Chat = ({ location }) => {
@@ -15,18 +17,7 @@ const Chat = ({ location }) => {
   const [room, setRoom] = useState('');
   const [users, setUsers] = useState([]);
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      name: 'test',
-      time: '3:47:9 pm',
-      text: 'tetwgwegwegweg',
-    },
-    {
-      name: 'weg',
-      time: '3:47:10 pm',
-      text: 'tetwgwegwegweg',
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [botMessage, setBotMessage] = useState({});
   const ENDPOINT = 'http://localhost:5000/';
 
@@ -73,95 +64,34 @@ const Chat = ({ location }) => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Room: {room}</h1>
-        <Link to='/' style={{ textDecoration: 'none' }}>
-          <span>Leave Room</span>
+    <div className={styles.Chat}>
+      <div className={styles.Info}>
+        <h1 className={styles.Room}>
+          Room: <strong>{room}</strong>
+        </h1>
+        <Link to='/' className={styles.Link}>
+          Leave Room
         </Link>
       </div>
-      <div>
-        <h3>Logged users:</h3>
-        <Users users={users} room={room} />
-      </div>
-      <div style={{ position: 'relative' }}>
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
+      <div className={styles.ChatContainer}>
+        <div className={botMessage.text ? styles.BotMessage : null}>
           <span>{botMessage.text}</span>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            width: '100%',
-            height: '70vh',
-            overflowY: 'scroll',
-          }}
-        >
+        <div className={styles.MessagesContainer}>
           <Messages messages={messages} name={name} />
         </div>
-        <NewMessage
-          onSend={sendMessage}
-          setMessage={setMessage}
-          message={message}
-        />
+      </div>
+      <NewMessage
+        onSend={sendMessage}
+        setMessage={setMessage}
+        message={message}
+      />
+
+      <div className={styles.UsersInfo}>
+        <h3 className={styles.Room}>Logged users:</h3>
+        <Users users={users} room={room} />
       </div>
     </div>
-    // <Container
-    //   maxWidth='md'
-    //   style={{
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     height: '97vh',
-    //   }}
-    // >
-    //   <Paper>
-    //     <Typography>Welcome {name}!</Typography>
-    //     <Typography>Room: {room}</Typography>
-    //     <Link to='/' style={{ textDecoration: 'none' }}>
-    //       <Button variant='contained' color='primary'>
-    //         Leave Room!
-    //       </Button>
-    //     </Link>
-    //   </Paper>
-    //   <Paper
-    //     style={{
-    //       display: 'flex',
-    //       flexDirection: 'column',
-    //       justifyContent: 'flex-end',
-    //       width: '100%',
-    //       height: '70vh',
-    //       overflowY: 'scroll',
-    //     }}
-    //   >
-    //     <Messages messages={messages} name={name} />
-    //     <NewMessage
-    //       onSend={sendMessage}
-    //       setMessage={setMessage}
-    //       message={message}
-    //     />
-    //   </Paper>
-    //   <Accordion>
-    //     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-    //       <Typography>Logged users</Typography>
-    //     </AccordionSummary>
-    //     <AccordionDetails>
-    //       <Users users={users} room={room} />
-    //     </AccordionDetails>
-    //   </Accordion>
-    // </Container>
   );
 };
 

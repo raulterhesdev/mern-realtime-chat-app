@@ -1,23 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import styles from './TextInput.module.css';
 
 const TextInput = (props) => {
+  const [labelFloating, setLabelFloating] = useState(false);
+
+  console.log(props.errorMessage);
+
   return (
-    <React.Fragment>
-      <label htmlFor={props.name}>{props.label}</label>
+    <div className={styles.TextInput}>
       <input
         type='text'
+        autoComplete='off'
+        placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}
-        placeholder={props.placeholder}
         name={props.name}
-        onBlur={props.onBlur}
-        onFocus={props.onFocus}
+        onBlur={(e) => {
+          if (props.onBlur) {
+            props.onBlur(e);
+          }
+          if (props.value === '') {
+            setLabelFloating(false);
+          }
+        }}
+        onFocus={(e) => {
+          if (props.onBlur) {
+            props.onFocus(e);
+          }
+          setLabelFloating(true);
+        }}
+        className={styles.Input}
         style={{
-          borderColor: props.error ? 'red' : 'blue',
+          ...props.style,
+          borderColor: props.error ? 'var(--error)' : 'var(--white-50)',
         }}
       />
-      <p>{props.errorMessage}</p>
-    </React.Fragment>
+      <label
+        htmlFor={props.name}
+        className={!labelFloating ? styles.Label : styles.LabelFocused}
+      >
+        {props.label}
+      </label>
+      <p className={styles.Error}>{props.errorMessage}</p>
+    </div>
   );
 };
 

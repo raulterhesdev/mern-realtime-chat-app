@@ -1,0 +1,49 @@
+.TextInput {
+  position: relative;
+}
+
+.Input {
+  padding: 12px 16px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--white-50);
+  color: var(--white);
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+
+.Input:focus {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--white);
+}
+
+.Input::placeholder {
+  color: var(--white-50);
+}
+
+.Label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: var(--white-50);
+  transition: 0.3s ease;
+  font-size: 1rem;
+}
+
+.LabelFocused {
+  position: absolute;
+  top: -20px;
+  left: 8px;
+  color: var(--white);
+  transition: 0.3s ease;
+  /* font-size: 0.9rem; */
+}
+
+.Error {
+  min-height: 24px;
+  margin-bottom: 1.5rem;
+  transition: 0.3s ease;
+  color: var(--error);
+}

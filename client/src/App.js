@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom';
 import Chat from './components/Chat/Chat';
 import RoomSelect from './components/RoomSelect/RoomSelect';
 
+import './App.css';
+
 function App() {
   return (
     <Switch>

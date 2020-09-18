@@ -1,0 +1,126 @@
+.Info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 12px 5%;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+}
+
+.Room {
+  color: var(--white-50);
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.Room strong {
+  color: var(--white);
+}
+
+.Link {
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: none;
+  outline: none;
+  border: 1px solid var(--white-50);
+  color: var(--white);
+
+  transition: 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.Link:hover {
+  border: 1px solid var(--white);
+  color: var(--white);
+}
+
+.UsersInfo {
+  display: flex;
+  max-width: 100%;
+  margin: 0 auto;
+  align-items: center;
+  padding: 12px 5%;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+}
+
+.ChatContainer {
+  background-color: var(--black);
+  margin: 0 auto;
+  width: 70%;
+  min-width: 300px;
+  max-width: 1080px;
+  overflow-y: auto;
+  position: relative;
+  height: 80vh;
+}
+
+/* width */
+.ChatContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.ChatContainer::-webkit-scrollbar-track {
+  background: var(--black);
+  border-radius: 4px;
+}
+
+/* Handle */
+.ChatContainer::-webkit-scrollbar-thumb {
+  background: var(--secondary-50);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+.ChatContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+.MessagesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+}
+
+.BotMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s linear;
+  animation: comeDown 0.3s;
+  transform: translateY(0px);
+  background-color: var(--black-50);
+  padding: 10px;
+}
+
+.BotMessage span {
+  color: var(--white);
+  background-color: var(--primary);
+  padding: 12px;
+  border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+  .ChatContainer {
+    width: 95%;
+  }
+}
+
+@keyframes comeDown {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}

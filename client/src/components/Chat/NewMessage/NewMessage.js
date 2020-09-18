@@ -1,60 +1,23 @@
 import React from 'react';
 
-import TextInput from '../../TextInput/TextInput';
+import styles from './NewMessage.module.css';
 
 const NewMessage = ({ onSend, setMessage, message }) => {
   return (
-    <div>
-      <TextInput
+    <div className={styles.New}>
+      <input
+        type='text'
+        autoComplete='off'
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder='Your message...'
+        className={styles.Input}
+        onKeyPress={(e) => (e.key === 'Enter' ? onSend(e) : null)}
       />
-      <button type='submit' onClick={onSend}>
+      <button type='submit' onClick={onSend} className={styles.Button}>
         Send
       </button>
     </div>
-    // <Container
-    //   style={{
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //   }}
-    // >
-    //   <Input
-    //     placeholder='Your message...'
-    //     onChange={(e) => setMessage(e.target.value)}
-    //     value={message}
-    //     style={{ width: '90%', marginRight: 8 }}
-    //     color='primary'
-    //   />
-    //   <Button
-    //     variant='contained'
-    //     color='primary'
-    //     endIcon={<Icon>send</Icon>}
-    //     onClick={onSend}
-    //   >
-    //     Send
-    //   </Button>
-    // </Container>
-    // <Pane display='flex'>
-    //   <Textarea
-    //     placeholder='Your message...'
-    //     resize='none'
-    //     onChange={(e) => setMessage(e.target.value)}
-    //     value={message}
-    //   />
-
-    //   <Button
-    //     disabled={message === '' ? true : false}
-    //     appearance='minimal'
-    //     height='100%'
-    //     paddingX={16}
-    //     onClick={onSend}
-    //   >
-    //     Send
-    //   </Button>
-    // </Pane>
   );
 };
 

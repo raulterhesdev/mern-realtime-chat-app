@@ -1,39 +1,29 @@
 import React from 'react';
 
+import styles from './Message.module.css';
+
 const Message = ({ data, name }) => {
   return (
     <div
+      className={styles.Message}
       style={{
-        backgroundColor: data.name === name ? 'teal' : 'salmon',
         alignSelf: data.name === name ? 'flex-end' : 'flex-start',
       }}
     >
-      <div>
-        <p>{data.name}</p>
+      <p
+        className={styles.Text}
+        style={{
+          backgroundColor:
+            data.name === name ? 'var(--primary)' : 'var(--secondary)',
+        }}
+      >
+        {data.text}
+      </p>
+      <div className={styles.Info}>
         <p>{data.time}</p>
+        <p>{data.name}</p>
       </div>
-      <p>{data.text}</p>
     </div>
-    // <Card
-    //   style={{
-    //     backgroundColor: data.name === name ? 'teal' : 'salmon',
-    //     alignSelf: data.name === name ? 'flex-end' : 'flex-start',
-    //   }}
-    // >
-    //   <Typography>{data.name}</Typography>
-    //   <Typography>{data.time}</Typography>
-    //   <Typography>{data.text}</Typography>
-    // </Card>
-    // <Card
-    //   background={data.name === name ? 'tintTeal' : 'tintRed'}
-    //   alignSelf={data.name === name ? 'flex-end' : 'flex-start'}
-    // >
-    //   <Pane display='flex'>
-    //     <Heading>{data.name}</Heading>
-    //     <Text color='muted'>{data.time}</Text>
-    //   </Pane>
-    //   <Paragraph>{data.text}</Paragraph>
-    // </Card>
   );
 };
 

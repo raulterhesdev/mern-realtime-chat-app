@@ -3,11 +3,11 @@ import User from './User/User';
 
 const Users = ({ users, room }) => {
   return (
-    <React.Fragment>
+    <div style={{ display: 'flex', marginLeft: 12 }}>
       {users.map((usr) => (
         <User key={usr.id} user={usr} room={room} />
       ))}
-    </React.Fragment>
+    </div>
   );
 };
 

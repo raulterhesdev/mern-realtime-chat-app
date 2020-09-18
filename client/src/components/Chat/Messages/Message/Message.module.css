@@ -1,0 +1,25 @@
+.Message {
+  margin-bottom: 8px;
+  color: var(--white);
+}
+
+.Info {
+  display: flex;
+  font-size: 0.7rem;
+  justify-content: flex-end;
+}
+
+.Info p {
+  padding-bottom: 2px;
+  padding-left: 4px;
+}
+
+.Info p:first-child {
+  color: var(--white-50);
+}
+
+.Text {
+  padding: 12px;
+  border-radius: 18px;
+  font-size: 0.9rem;
+}

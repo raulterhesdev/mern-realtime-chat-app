@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import TextInput from '../TextInput/TextInput';
 
+import styles from './RoomSelect.module.css';
+
 const RoomSelect = () => {
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(null);
@@ -25,41 +27,45 @@ const RoomSelect = () => {
   };
 
   return (
-    <div>
-      <h1>Welcome to Hazel Chat</h1>
-      <TextInput
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder='Your name...'
-        name='name'
-        label='Name'
-        errorMessage={nameError}
-        onBlur={() =>
-          name === '' ? setNameError('Please enter your name.') : null
-        }
-        onFocus={() => setNameError(null)}
-        error={nameError ? true : false}
-      />
-      <TextInput
-        value={room}
-        onChange={(e) => setRoom(e.target.value)}
-        placeholder='Room Name'
-        name='room'
-        label='Room'
-        errorMessage={roomError}
-        onBlur={() =>
-          room === '' ? setRoomError('Please enter your name.') : null
-        }
-        onFocus={() => setRoomError(null)}
-        error={roomError ? true : false}
-      />
-      <Link
-        onClick={checkValid}
-        to={`/chat?name=${name}&room=${room}`}
-        style={{ textDecoration: 'none' }}
-      >
-        <button type='submit'>Enter Chat!</button>
-      </Link>
+    <div className={styles.RoomSelect}>
+      <div className={styles.Container}>
+        <h1 className={styles.Title}>Welcome to HazelChat!</h1>
+        <TextInput
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          name='name'
+          label='Name'
+          errorMessage={nameError}
+          onBlur={() =>
+            name === '' ? setNameError('Please enter your name.') : null
+          }
+          onFocus={() => setNameError(null)}
+          error={nameError ? true : false}
+          style={{
+            minWidth: 300,
+          }}
+        />
+        <TextInput
+          value={room}
+          onChange={(e) => setRoom(e.target.value)}
+          name='room'
+          label='Room'
+          errorMessage={roomError}
+          onBlur={() =>
+            room === '' ? setRoomError('Please enter your name.') : null
+          }
+          onFocus={() => setRoomError(null)}
+          error={roomError ? true : false}
+          style={{
+            minWidth: 300,
+          }}
+        />
+        <Link onClick={checkValid} to={`/chat?name=${name}&room=${room}`}>
+          <button type='submit' className={styles.Button}>
+            Enter Chat!
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
