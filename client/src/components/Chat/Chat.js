@@ -19,7 +19,8 @@ const Chat = ({ location }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [botMessage, setBotMessage] = useState({});
-  const ENDPOINT = 'http://localhost:5000/';
+  // const ENDPOINT = 'http://localhost:5000/';// DEV
+  const ENDPOINT = 'https://afternoon-reef-68041.herokuapp.com/'; //PROD
 
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
